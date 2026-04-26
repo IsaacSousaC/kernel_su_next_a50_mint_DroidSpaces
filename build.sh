@@ -487,9 +487,11 @@ if $BUILD_KERNEL_KSU; then
         sleep 3
     else
         merge_config root-kernelsu
+        merge_config droidspaces
     fi
 else
     merge_config root-none
+    merge_config droidspaces
 fi
 
 if $BUILD_KERNEL_PERMISSIVE; then
