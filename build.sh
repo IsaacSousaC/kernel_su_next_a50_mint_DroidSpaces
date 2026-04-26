@@ -449,7 +449,12 @@ mkdir -p "$TMP_DIR"
 VERIFY_TOOLCHAIN
 VERIFY_DEFCONFIG
 
-git submodule update --init "$TOP/KernelSU"
+# KernelSU-Next with SUSFS v2 is vendored in-tree at $TOP/KernelSU-Next.
+# drivers/kernelsu -> ../KernelSU-Next/kernel
+if [ ! -d "$TOP/KernelSU-Next/kernel" ]; then
+    script_echo "E: KernelSU-Next source not found at $TOP/KernelSU-Next"
+    exit_script
+fi
 
 if $BUILD_KERNEL_CI; then
 	export KBUILD_BUILD_USER="Clembot"
